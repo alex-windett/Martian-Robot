@@ -18,7 +18,6 @@ end
 
 class Robot
 # Creating a new Robot
-
    $compass = {
     :north => "N",
     :east => "E",
@@ -105,9 +104,40 @@ class Robot
 
 end
 
-board_1 = Mars.new(5, 3)
-robot_1 = Robot.new(3, 2, "N", "FRRFLLFFRRFLL")
+def menu
+  puts `clear`
 
-board_1.robots << robot_1
+  puts "Press 1 to create or alter the size of Mars, press 2 to send of a new robot or 3 to quite"
+
+  gets.chomp
+end
+
+response = menu
+
+while response != "3"
+  if response = "1"
+    puts "What is the length of Mars (X value)?"
+    mars_x = gets.chomp.to_i
+    puts "What is the height of Mars (Y value)?"
+    mars_y = gets.chomp.to_i
+
+    board_1 = Mars.new(mars_x, mars_y)
+  elsif response = "2"
+    puts "What is the starting x value your Robot?"
+    robot_x = gets.chomp.to_i
+    puts "What is the starting y value your Robot?"
+    robot_y = gets.chomp.to_i
+    puts "What compass direction is he facing? (N, S, W, E)"
+    robot_orientation = gets.chomp.to_s
+    puts "Enter instructions for your robot"
+    @obot_instructions = gets.chomp
+
+    robot_1 = Robot.new(robot_x, robot_y, robot_orientation, robot_instructions)
+
+    board_1.robots << robot_1
+  end
+
+  response = menu
+end
 
 binding.pry
