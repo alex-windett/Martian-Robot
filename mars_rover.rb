@@ -69,15 +69,15 @@ class Robot
       end
     when :south
       if m == "L"
-        @orientation = :south
+        @orientation = :east
       elsif 
         @orientation = :west
       end
     when :west
       if m == "L"
-        @orientation = :west
+        @orientation = :south
       elsif 
-        @orientation = :east
+        @orientation = :north
       end
     end
   end
@@ -106,7 +106,7 @@ class Robot
 end
 
 board_1 = Mars.new(5, 3)
-robot_1 = Robot.new(1, 1, "E", "RFRFRFRFG")
+robot_1 = Robot.new(3, 2, "N", "FRRFLLFFRRFLL")
 
 board_1.robots << robot_1
 
