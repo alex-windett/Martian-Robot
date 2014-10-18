@@ -64,34 +64,50 @@ class Robot
   end
 
   def move_forward 
-    # lost_positions = []
+    x_lost_positions = []
+    y_lost_positions = []
 
   # Add or minus 1 to X/Y co-oridnate depending on direction
   # robot will be moving
+  # if value is greater than mars size alert with "Lost"
+  # place that value into lost positions 
+  # robot will therefore not go there
     case @orientation
     when :north 
       @starting_y += 1
         if @starting_y > $y_maximum
           puts "Lost"
+          y_lost_positions << @starting_y
+        elsif y_lost_positions.include? @starting_y
+          puts "Don't want to go there"
         end
     when :east
       @starting_x += 1
         if @starting_x > $x_maximum
-          puts "Lost"         
+          puts "Lost"
+          x_lost_positions << @starting_x   
+        elsif x_lost_positions.include? @starting_x
+          puts "Don't want to go there"      
         end
     when :south
       @starting_y -= 1
         if @starting_y < 0
-          puts "Lost"   
+          puts "Lost"
+          y_lost_positions << @starting_y 
+        elsif y_lost_positions.include? @starting_y
+          puts "Don't want to go there"  
         end
     when :west
       @starting_x -= 1
       if @starting_x < 0
-          puts "Lost" 
+          puts "Lost"
+          x_lost_positions << @starting_x 
+        elsif x_lost_positions.include? @starting_x
+          puts "Don't want to go there"
         end
     end
     result
-
+    # binding.pry
   end
 
   def invalid_input

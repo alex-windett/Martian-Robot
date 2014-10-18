@@ -5,6 +5,7 @@ require_relative "robot"
 
 
 def menu
+  `clear`
   puts "1 for new mars, 2 for new robot"
 
   gets.chomp
