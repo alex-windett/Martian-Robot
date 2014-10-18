@@ -101,6 +101,5 @@ class Robot
 
   def result
     puts "X = #{@starting_x}, Y = #{@starting_y}, Orientation = #{@orientation}"
-    self.save
   end 
 end
