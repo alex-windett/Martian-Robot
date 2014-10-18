@@ -1,5 +1,4 @@
 class Mars 
-# Creating a new Mars planet
 
   attr_accessor :maximum_x, :maximum_y, :robots
 
@@ -8,6 +7,7 @@ class Mars
   # maximum values of the grid
     $x_maximum = x
     $y_maximum = y
+    # variables to be accessed in the robot class
     @robots = []
   end
 

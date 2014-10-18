@@ -9,7 +9,8 @@ def create_mars
   mars_x = gets.chomp.to_i
   puts "What is the height of Mars (Y value)?"
   mars_y = gets.chomp.to_i
-    Mars.new(mars_x, mars_y)
+  
+  @mars =  Mars.new(mars_x, mars_y)
 end
 
 def create_robot
@@ -22,9 +23,9 @@ def create_robot
   puts "Enter instructions for your robot"
   robot_instructions = gets.chomp.upcase
 
-  # @mars.robots << @robot
+  @mars.robots << robot
   
-  Robot.new(robot_x, robot_y, robot_orientation, robot_instructions).action
+  robot = Robot.new(robot_x, robot_y, robot_orientation, robot_instructions).action
 end
 
 binding.pry

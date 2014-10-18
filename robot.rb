@@ -1,6 +1,5 @@
 class Robot
 
-# Creating a new Robot
    $compass = {
     :north => "N",
     :east => "E",
@@ -65,7 +64,7 @@ class Robot
   end
 
   def move_forward 
-    lost_positions = []
+    # lost_positions = []
 
   # Add or minus 1 to X/Y co-oridnate depending on direction
   # robot will be moving
@@ -102,5 +101,6 @@ class Robot
 
   def result
     puts "X = #{@starting_x}, Y = #{@starting_y}, Orientation = #{@orientation}"
+    self.save
   end 
 end
