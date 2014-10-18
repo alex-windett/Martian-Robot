@@ -29,20 +29,20 @@ class Robot
   def action
     # Split each of the actions, iterate over each one 
     # and determine which method should now be performed
-    movement = @movements.split(//)
+    movement = @movements.upcase.split(//)
     movement.each do |m|
       if m == "L" || m == "R"
         puts "Hello World"
       elsif m == "F"
        puts "FFFFFFF"
       else 
-        invalid
+        invalid_input
       end
     end
   end
 
-  def invalid
-    puts "invalid movement"
+  def invalid_input
+    puts "This command has been ignore as it was an invalid letter"
   end
 
 end
