@@ -1,18 +1,20 @@
 class Robot
 
-   $compass = {
+   @@compass = {
     :north => "N",
     :east => "E",
     :south => "S",
     :west => "W"
   }
+  # Class variable set as a has of compass directions
+  # correlating to user input.
 
   attr_accessor :starting_x, :starting_y, :orientation, :movements
 
   def initialize(x, y, orientation, movements)
     @starting_x = x
     @starting_y = y
-    @orientation = $compass.key(orientation)
+    @orientation = @@compass.key(orientation)
     @movements = movements
   end
 

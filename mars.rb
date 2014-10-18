@@ -7,7 +7,7 @@ class Mars
   # maximum values of the grid
     $x_maximum = x
     $y_maximum = y
-    # variables to be accessed in the robot class
+    # global variables to be accessed in the robot class
     @robots = []
   end
 
