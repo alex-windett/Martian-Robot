@@ -40,25 +40,25 @@ class Robot
     when :north
       if m == "L"
         @orientation = :west
-      elsif 
+      elsif m == "R" 
         @orientation = :east
       end
     when :east
       if m == "L"
         @orientation = :north
-      elsif 
+      elsif m == "R"
         @orientation = :south
       end
     when :south
       if m == "L"
         @orientation = :east
-      elsif 
+      elsif m == "R" 
         @orientation = :west
       end
     when :west
       if m == "L"
         @orientation = :south
-      elsif 
+      elsif m == "R" 
         @orientation = :north
       end
     end
