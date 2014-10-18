@@ -73,34 +73,26 @@ class Robot
     when :north 
       @starting_y += 1
         if @starting_y > $y_maximum
-          lost_positions << @starting_y
           puts "Lost"
-          
         end
     when :east
       @starting_x += 1
         if @starting_x > $x_maximum
-          lost_positions << @starting_x
-          puts "Lost"
-          
+          puts "Lost"         
         end
     when :south
       @starting_y -= 1
         if @starting_y < 0
-          lost positions << @starting_y
-          puts "Lost"
-          
+          puts "Lost"   
         end
     when :west
       @starting_x -= 1
       if @starting_x < 0
-          lost positions << @starting_x
-          puts "Lost"
-          
+          puts "Lost" 
         end
     end
     result
-    binding.pry
+
   end
 
   def invalid_input
