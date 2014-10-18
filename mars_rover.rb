@@ -41,11 +41,43 @@ class Robot
     movement = @movements.upcase.split(//)
     movement.each do |m|
       if m == "L" || m == "R"
-        puts "Hello World"
+        turn(m)
       elsif m == "F"
        move_forward
       else 
         invalid_input
+      end
+    end
+  end
+
+  def turn(m)
+  # take the orientation, for example, when facing north and 
+  # direction is "L", now orientated west. 
+  # Repeated for each occurance
+    case @orientation
+    when :north
+      if m == "L"
+        @orientation = :west
+      elsif 
+        @orientation = :east
+      end
+    when :east
+      if m == "L"
+        @orientation = :north
+      elsif 
+        @orientation = :south
+      end
+    when :south
+      if m == "L"
+        @orientation = :south
+      elsif 
+        @orientation = :west
+      end
+    when :west
+      if m == "L"
+        @orientation = :west
+      elsif 
+        @orientation = :east
       end
     end
   end
