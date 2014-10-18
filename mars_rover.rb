@@ -17,18 +17,39 @@ end
 
 
 class Robot
-
   attr_accessor :starting_x, :starting_y
 
-  def initialize(x, y)
+  def initialize(x, y, orientation, movements)
     @starting_x = x
     @starting_y = y
+    @orientation = orientation
+    @movements = movements
+  end
+
+  def action
+    # Split each of the actions, iterate over each one 
+    # and determine which method should now be performed
+    movement = @movements.split(//)
+    movement.each do |m|
+      if m == "L" || m == "R"
+        puts "Hello World"
+      elsif m == "F"
+       puts "FFFFFFF"
+      else 
+        invalid
+      end
+    end
+  end
+
+  def invalid
+    puts "invalid movement"
   end
 
 end
 
 board_1 = Mars.new(5, 3)
-robot_1 = Robot.new(1, 1)
+robot_1 = Robot.new(1, 1, "E", "RFRFRFRFG")
 
 board_1.robots << robot_1
+
 binding.pry
