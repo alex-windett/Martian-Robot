@@ -8,7 +8,7 @@ class Robot
     :west => "W"
   }
 
-  attr_accessor :starting_x, :starting_y
+  attr_accessor :starting_x, :starting_y, :orientation, :movements
 
   def initialize(x, y, orientation, movements)
     @starting_x = x
@@ -65,19 +65,42 @@ class Robot
   end
 
   def move_forward 
+    lost_positions = []
+
   # Add or minus 1 to X/Y co-oridnate depending on direction
   # robot will be moving
     case @orientation
     when :north 
       @starting_y += 1
+        if @starting_y > $y_maximum
+          lost_positions << @starting_y
+          puts "Lost"
+          
+        end
     when :east
       @starting_x += 1
+        if @starting_x > $x_maximum
+          lost_positions << @starting_x
+          puts "Lost"
+          
+        end
     when :south
       @starting_y -= 1
+        if @starting_y < 0
+          lost positions << @starting_y
+          puts "Lost"
+          
+        end
     when :west
       @starting_x -= 1
+      if @starting_x < 0
+          lost positions << @starting_x
+          puts "Lost"
+          
+        end
     end
-    puts "X = #{@starting_x}, Y = #{@starting_y}"
+    result
+    binding.pry
   end
 
   def invalid_input
@@ -85,4 +108,7 @@ class Robot
     puts "This command has been ignore as it was an invalid letter"
   end
 
+  def result
+    puts "X = #{@starting_x}, Y = #{@starting_y}, Orientation = #{@orientation}"
+  end 
 end

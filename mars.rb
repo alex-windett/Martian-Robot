@@ -6,8 +6,8 @@ class Mars
   def initialize(x, y)
   # Creating instance variables of the x/y value to be
   # maximum values of the grid
-    @x_maximum = x
-    @y_maximum = y
+    $x_maximum = x
+    $y_maximum = y
     @robots = []
   end
 
