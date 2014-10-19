@@ -1,19 +1,19 @@
 class Robot
 
    @@compass = {
-    :north => "N",
-    :east => "E",
-    :south => "S",
-    :west => "W"
+    :north => "n",
+    :east => "e",
+    :south => "s",
+    :west => "w"
   }
-  # Class variable set as a has of compass directions
+  # Class variable with a hash of compass directions
   # correlating to user input.
 
   attr_accessor :starting_x, :starting_y, :orientation, :movements
 
   def initialize(x, y, orientation, movements)
-    @starting_x = x
-    @starting_y = y
+    @starting_x = x.to_i
+    @starting_y = y.to_i
     @orientation = @@compass.key(orientation)
     @movements = movements
   end
@@ -28,9 +28,14 @@ class Robot
       elsif m == "F"
        move_forward
       else 
-        invalid_input
+        error
       end
     end
+  end
+
+  def error
+  # If letter is not one of three then raise error
+    puts "This command has been ignored as it was an invalid letter"
   end
 
   def turn(m)
@@ -77,31 +82,31 @@ class Robot
     case @orientation
     when :north 
       @starting_y += 1
-        if @starting_y > $y_maximum
-          lost_y_coord
-        elsif @y_lost_positions.include? @starting_y
+        if @y_lost_positions.include? @starting_y
           lost_robot_scent
+        elsif @starting_y > $y_maximum
+          lost_y_coord
         end
     when :east
       @starting_x += 1
-        if @starting_x > $x_maximum
-          lost_x_coord  
-        elsif @x_lost_positions.include? @starting_x
-          lost_robot_scent      
+        if @x_lost_positions.include? @starting_x
+          lost_robot_scent 
+        elsif @starting_x > $x_maximum
+          lost_x_coord       
         end
     when :south
       @starting_y -= 1
-        if @starting_y < 0
-          lost_y_coord
-        elsif @y_lost_positions.include? @starting_y
-          lost_robot_scent  
+        if @y_lost_positions.include? @starting_y
+          lost_robot_scent 
+        elsif @starting_y < 0
+          lost_y_coord 
         end
     when :west
       @starting_x -= 1
-      if @starting_x < 0
-          lost_x_coord 
-        elsif @x_lost_positions.include? @starting_x
+        if @x_lost_positions.include? @starting_x
           lost_robot_scent
+        elsif @starting_x < 0
+          lost_x_coord
         end
     end
     result
@@ -120,13 +125,9 @@ class Robot
   end
 
   def lost_robot_scent
-    puts "Don't want to go there"
+    puts "Don't want to go there, a robot was lost recently"
   end
 
-  def invalid_input
-  # If letter is not one of three then raise error
-    puts "This command has been ignored as it was an invalid letter"
-  end
 
   def result
     puts "X = #{@starting_x}, Y = #{@starting_y}, Orientation = #{@orientation}"

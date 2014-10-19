@@ -9,6 +9,11 @@ class Mars
     $y_maximum = y
     # global variables to be accessed in the robot class
     @robots = []
+
+    if $x_maximum > 50 || $y_maximum > 50 || $x_maximum < 0 || $y_maximum < 0
+      `clear`
+      puts "Please provide valid co-ordinates (0 - 50)"
+    end
   end
 
 end
