@@ -1,10 +1,10 @@
 class Robot
 
    @@compass = {
-    :north => "n",
-    :east => "e",
-    :south => "s",
-    :west => "w"
+    :north => "N",
+    :east => "E",
+    :south => "S",
+    :west => "W"
   }
   # Class variable with a hash of compass directions
   # correlating to user input.
@@ -12,8 +12,8 @@ class Robot
   attr_accessor :starting_x, :starting_y, :orientation, :movements
 
   def initialize(x, y, orientation, movements)
-    @starting_x = x.to_i
-    @starting_y = y.to_i
+    @starting_x = x
+    @starting_y = y
     @orientation = @@compass.key(orientation)
     @movements = movements
   end
@@ -82,31 +82,31 @@ class Robot
     case @orientation
     when :north 
       @starting_y += 1
-        if @y_lost_positions.include? @starting_y
-          lost_robot_scent
-        elsif @starting_y > $y_maximum
+        if @starting_y > $y_maximum
           lost_y_coord
+        elsif @y_lost_positions.include? @starting_y
+          lost_robot_scent
         end
     when :east
       @starting_x += 1
-        if @x_lost_positions.include? @starting_x
-          lost_robot_scent 
-        elsif @starting_x > $x_maximum
-          lost_x_coord       
+        if @starting_x > $x_maximum
+          lost_x_coord  
+        elsif @x_lost_positions.include? @starting_x
+          lost_robot_scent      
         end
     when :south
       @starting_y -= 1
-        if @y_lost_positions.include? @starting_y
-          lost_robot_scent 
-        elsif @starting_y < 0
-          lost_y_coord 
+        if @starting_y < 0
+          lost_y_coord
+        elsif @y_lost_positions.include? @starting_y
+          lost_robot_scent  
         end
     when :west
       @starting_x -= 1
-        if @x_lost_positions.include? @starting_x
+      if @starting_x < 0
+          lost_x_coord 
+        elsif @x_lost_positions.include? @starting_x
           lost_robot_scent
-        elsif @starting_x < 0
-          lost_x_coord
         end
     end
     result
@@ -125,11 +125,11 @@ class Robot
   end
 
   def lost_robot_scent
-    puts "Don't want to go there, a robot was lost recently"
+    puts "Don't want to go there"
   end
 
 
   def result
-    puts "X = #{@starting_x}, Y = #{@starting_y}, Orientation = #{@orientation}"
+    puts "#{@starting_x} #{@starting_y} #{@orientation.capitalize}"
   end 
 end
