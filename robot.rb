@@ -1,3 +1,6 @@
+$x_lost_positions = []
+$y_lost_positions = []
+
 class Robot
 
    @@compass = {
@@ -71,8 +74,6 @@ class Robot
   end
 
   def move_forward 
-    @x_lost_positions = []
-    @y_lost_positions = []
 
   # Add or minus 1 to X/Y co-oridnate depending on direction
   # robot will be moving
@@ -82,32 +83,32 @@ class Robot
     case @orientation
     when :north 
       @starting_y += 1
-        if @starting_y > $y_maximum
-          lost_y_coord
-        elsif @y_lost_positions.include? @starting_y
+        if $y_lost_positions.include? @starting_y
           lost_robot_scent
+        elsif @starting_y > $y_maximum
+          lost_y_coord
         end
     when :east
       @starting_x += 1
-        if @starting_x > $x_maximum
-          lost_x_coord  
-        elsif @x_lost_positions.include? @starting_x
-          lost_robot_scent      
+        if $x_lost_positions.include? @starting_x
+          lost_robot_scent
+        elsif @starting_x > $x_maximum
+          lost_x_coord        
         end
     when :south
       @starting_y -= 1
-        if @starting_y < 0
-          lost_y_coord
-        elsif @y_lost_positions.include? @starting_y
+        if $y_lost_positions.include? @starting_y
           lost_robot_scent  
+        elsif @starting_y < 0
+          lost_y_coord
         end
     when :west
       @starting_x -= 1
-      if @starting_x < 0
-          lost_x_coord 
-        elsif @x_lost_positions.include? @starting_x
+      if $x_lost_positions.include? @starting_x
           lost_robot_scent
-        end
+      elsif @starting_x < 0
+          lost_x_coord 
+      end
     end
     result
   end
@@ -115,17 +116,17 @@ class Robot
   def lost_x_coord
   # put lost x cooridantes into empty array
     puts "Lost"
-    @x_lost_positions << @starting_x 
+    $x_lost_positions << @starting_x 
   end
 
   def lost_y_coord
   # put lost y cooridantes into empty array
     puts "Lost"
-    @y_lost_positions << @starting_y
+    $y_lost_positions << @starting_y
   end
 
   def lost_robot_scent
-    puts "Don't want to go there"
+    puts "Lost robots have gone that way, don't want to go there"
   end
 
 
