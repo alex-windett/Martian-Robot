@@ -80,53 +80,71 @@ class Robot
   # If statements checking max/min val of grid
   # and if there have been lost robots before. 
   # Relevant methods are then called.
-    case @orientation
-    when :north 
-      @starting_y += 1
-        if $y_lost_positions.include? @starting_y
-          lost_robot_scent
-        elsif @starting_y > $y_maximum
-          lost_y_coord
+    if @starting_x != nil && @starting_y != nil
+        case @orientation
+        when :north 
+          @starting_y += 1
+            if $y_lost_positions.include? @starting_y
+              lost_robot_scent
+            elsif @starting_y > $y_maximum
+              lost_y_coord
+            end
+        when :east
+          @starting_x += 1
+            if $x_lost_positions.include? @starting_x
+              lost_robot_scent
+            elsif @starting_x > $x_maximum
+              lost_x_coord        
+            end
+        when :south
+          @starting_y -= 1
+            if $y_lost_positions.include? @starting_y
+              lost_robot_scent  
+            elsif @starting_y < 0
+              lost_y_coord
+            end
+        when :west
+          @starting_x -= 1
+          if $x_lost_positions.include? @starting_x
+              lost_robot_scent
+          elsif @starting_x < 0
+              lost_x_coord 
+          end
         end
-    when :east
-      @starting_x += 1
-        if $x_lost_positions.include? @starting_x
-          lost_robot_scent
-        elsif @starting_x > $x_maximum
-          lost_x_coord        
-        end
-    when :south
-      @starting_y -= 1
-        if $y_lost_positions.include? @starting_y
-          lost_robot_scent  
-        elsif @starting_y < 0
-          lost_y_coord
-        end
-    when :west
-      @starting_x -= 1
-      if $x_lost_positions.include? @starting_x
-          lost_robot_scent
-      elsif @starting_x < 0
-          lost_x_coord 
-      end
+        # binding.pry
+        result
     end
-    result
   end
 
   def lost_x_coord
-  # put lost x cooridantes into empty array
+  # print lost
+  # put lost x values into array
+  # return to menu and display result
+  # set x and y values to nil
     puts "Lost"
     $x_lost_positions << @starting_x 
+    menu
+    result
+    @starting_x = nil
+    @starting_y = nil
   end
 
   def lost_y_coord
-  # put lost y cooridantes into empty array
+  # print lost
+  # put lost y values into array
+  # return to menu and display result
+  # set x and y values to nil
     puts "Lost"
     $y_lost_positions << @starting_y
+    menu
+    result
+    @starting_y = nil
+    @starting_x = nil
   end
 
   def lost_robot_scent
     puts "Lost robots have gone that way, don't want to go there"
+    menu
   end
 
 
