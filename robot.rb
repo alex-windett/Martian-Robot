@@ -80,7 +80,7 @@ class Robot
   # If statements checking max/min val of grid
   # and if there have been lost robots before. 
   # Relevant methods are then called.
-    if @starting_x != nil && @starting_y != nil && @orientation != nil
+    if !@starting_x.nil? && !@starting_y.nil? && !@orientation.nil?
         case @orientation
         when :north 
           @starting_y += 1
@@ -97,7 +97,7 @@ class Robot
               lost_robot_scent
             elsif @starting_x > $x_maximum
               lost_x_coord 
-              else
+            else
               result       
             end
         when :south
@@ -111,13 +111,13 @@ class Robot
             end
         when :west
           @starting_x -= 1
-          if $x_lost_positions.include? @starting_x
-              lost_robot_scent
-          elsif @starting_x < 0
-              lost_x_coord 
+            if $x_lost_positions.include? @starting_x
+                lost_robot_scent
+            elsif @starting_x < 0
+                lost_x_coord 
             else
-              result
-          end
+                result
+            end
         end
         # binding.pry
         # result
