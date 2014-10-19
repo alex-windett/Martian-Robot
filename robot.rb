@@ -80,7 +80,7 @@ class Robot
   # If statements checking max/min val of grid
   # and if there have been lost robots before. 
   # Relevant methods are then called.
-    if @starting_x != nil && @starting_y != nil
+    if @starting_x != nil && @starting_y != nil && @orientation != nil
         case @orientation
         when :north 
           @starting_y += 1
@@ -88,13 +88,17 @@ class Robot
               lost_robot_scent
             elsif @starting_y > $y_maximum
               lost_y_coord
+            else
+              result
             end
         when :east
           @starting_x += 1
             if $x_lost_positions.include? @starting_x
               lost_robot_scent
             elsif @starting_x > $x_maximum
-              lost_x_coord        
+              lost_x_coord 
+              else
+              result       
             end
         when :south
           @starting_y -= 1
@@ -102,6 +106,8 @@ class Robot
               lost_robot_scent  
             elsif @starting_y < 0
               lost_y_coord
+            else
+              result
             end
         when :west
           @starting_x -= 1
@@ -109,10 +115,12 @@ class Robot
               lost_robot_scent
           elsif @starting_x < 0
               lost_x_coord 
+            else
+              result
           end
         end
         # binding.pry
-        result
+        # result
     end
   end
 
@@ -122,11 +130,13 @@ class Robot
   # return to menu and display result
   # set x and y values to nil
     puts "Lost"
-    $x_lost_positions << @starting_x 
-    menu
-    result
+    $x_lost_positions << @starting_x
     @starting_x = nil
-    @starting_y = nil
+    @starting_y = nil 
+    @orientation = nil
+    result
+    menu
+
   end
 
   def lost_y_coord
@@ -136,10 +146,11 @@ class Robot
   # set x and y values to nil
     puts "Lost"
     $y_lost_positions << @starting_y
-    menu
-    result
     @starting_y = nil
     @starting_x = nil
+    @orientation = nil
+    result
+    menu
   end
 
   def lost_robot_scent
@@ -149,6 +160,6 @@ class Robot
 
 
   def result
-    puts "#{@starting_x} #{@starting_y} #{@orientation.capitalize}"
+    puts "#{@starting_x} #{@starting_y} #{@orientation}"
   end 
 end
