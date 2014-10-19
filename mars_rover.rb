@@ -23,8 +23,7 @@ answer = menu
         mars_dimensions.empty?
           puts "please provide co-ordinates"
       elsif 
-        binding.pry
-        mars_dimensions[0] > 50 || mars_dimensions[1] > 50 || mars_dimensions[0] < 0 || mars_dimensions[1] < 0
+        mars_dimensions[0].to_i > 50 || mars_dimensions[1].to_i > 50 || mars_dimensions[0].to_i < 0 || mars_dimensions[1].to_i < 0
           puts "Please provide valid co-ordinates (0 - 50)"
       else
         @mars =  Mars.new(mars_dimensions[0].to_i, mars_dimensions[1].to_i)
