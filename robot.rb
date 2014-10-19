@@ -66,55 +66,66 @@ class Robot
   end
 
   def move_forward 
-    x_lost_positions = []
-    y_lost_positions = []
+    @x_lost_positions = []
+    @y_lost_positions = []
 
   # Add or minus 1 to X/Y co-oridnate depending on direction
   # robot will be moving
-  # if value is greater than mars size alert with "Lost"
-  # place that value into lost positions 
-  # robot will therefore not go there
+  # If statements checking max/min val of grid
+  # and if there have been lost robots before. 
+  # Relevant methods are then called.
     case @orientation
     when :north 
       @starting_y += 1
         if @starting_y > $y_maximum
-          puts "Lost"
-          y_lost_positions << @starting_y
-        elsif y_lost_positions.include? @starting_y
-          puts "Don't want to go there"
+          lost_y_coord
+        elsif @y_lost_positions.include? @starting_y
+          lost_robot_scent
         end
     when :east
       @starting_x += 1
         if @starting_x > $x_maximum
-          puts "Lost"
-          x_lost_positions << @starting_x   
-        elsif x_lost_positions.include? @starting_x
-          puts "Don't want to go there"      
+          lost_x_coord  
+        elsif @x_lost_positions.include? @starting_x
+          lost_robot_scent      
         end
     when :south
       @starting_y -= 1
         if @starting_y < 0
-          puts "Lost"
-          y_lost_positions << @starting_y 
-        elsif y_lost_positions.include? @starting_y
-          puts "Don't want to go there"  
+          lost_y_coord
+        elsif @y_lost_positions.include? @starting_y
+          lost_robot_scent  
         end
     when :west
       @starting_x -= 1
       if @starting_x < 0
-          puts "Lost"
-          x_lost_positions << @starting_x 
-        elsif x_lost_positions.include? @starting_x
-          puts "Don't want to go there"
+          lost_x_coord 
+        elsif @x_lost_positions.include? @starting_x
+          lost_robot_scent
         end
     end
     result
-    # binding.pry
+  end
+
+  def lost_x_coord
+  # put lost x cooridantes into empty array
+    puts "Lost"
+    @x_lost_positions << @starting_x 
+  end
+
+  def lost_y_coord
+  # put lost y cooridantes into empty array
+    puts "Lost"
+    @y_lost_positions << @starting_y
+  end
+
+  def lost_robot_scent
+    puts "Don't want to go there"
   end
 
   def invalid_input
   # If letter is not one of three then raise error
-    puts "This command has been ignore as it was an invalid letter"
+    puts "This command has been ignored as it was an invalid letter"
   end
 
   def result
